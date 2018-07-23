@@ -11,7 +11,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @EnableAutoConfiguration：开启自动配置功能(比如我们没有配置SpringMVC，但是可以使用SpringMVC的功能)
  * *****SpringBoot启动时从类路径下的META-INF/spring.factories中获取EnableAutoConfiguration指定的值*****
  * @AutoConfigurationPackage：将主配置类(@SpringBootApplication标注的类)的所在的包及下面所有子包里面的所有组件扫描到Spring容器
+ * 
+ * @ImportResource(locations = {"classpath:beans.xml"})：导入Spring的配置文件
  */
+
+// @ImportResource(locations = {"classpath:beans.xml"}) 不推荐
 @SpringBootApplication
 public class DemoApplication {
 

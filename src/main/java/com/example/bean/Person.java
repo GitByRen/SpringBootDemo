@@ -4,20 +4,28 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 /**
- * 将配置文件中配置的每一个属性的值，映射到这个组件中
+ * @ConfigurationProperties:告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定
+ * prefix="person"：配置文件中那个下面的所有属性进行一一映射，默认从全局配置文件读取
  * 
- * @ConfigurationProperties:告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定. prefix="person"：配置文件中那个下面的所有属性进行一一映射
  * 这个组件必须是容器中的组件，才能提供功能
+ * 
+ * @PropertySource:加载指定的配置文件
  */
 
+@PropertySource(value= {"classpath:person.properties"})
 @Component
-@ConfigurationProperties(prefix = "person")
+//@ConfigurationProperties(prefix = "person")
 public class Person {
 
+    /**
+     * @Value("${person.last-name}"),@Value("#{22}"),需要一个一个配置，麻烦
+     * @Value注解不支持JSR303数据校验,@ConfigurationProperties支持
+     * @ConfigurationProperties不支持SPEL,@Value支持
+     */
     private String              lastName;
     private Integer             age;
     private Boolean             boss;
