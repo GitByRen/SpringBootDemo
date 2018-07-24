@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
  * @PropertySource:加载指定的配置文件
  */
 
-@PropertySource(value= {"classpath:person.properties"})
+//@PropertySource(value= {"classpath:person.properties"})
 @Component
-//@ConfigurationProperties(prefix = "person")
+@ConfigurationProperties(prefix = "person")
 public class Person {
 
     /**

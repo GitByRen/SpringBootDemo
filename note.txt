@@ -15,3 +15,50 @@
 			- cat
 			- dog
 		行内写法：pets: [cat,dog]
+	******************************
+		person:
+		  lastName: zhangsan
+		  age: 20
+		  boss: false
+		  birth: 2017/1/1
+		  maps: {k1: v1,k2: v2}
+		  lists: 
+		    - lisi
+		    - zhaowliu
+		  dog: 
+		    name: 小狗
+		    age: 5
+2.${person.hello:hello} 占位符：获取不到值就用冒号指定一个值
+
+3.①application.properties:先建立application-dev.properties文件，然后在主配置文件配置spring.profiles.active=dev激活profile
+②在application.yml中
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev(在没有application-dev.properties的情况下激活下面的dev)
+---
+server:
+  port: 8083
+spring:
+  profiles: dev
+---
+server:
+  port: 8084
+spring:
+  profiles: prod
+
+4.配置文件加载位置(优先级从高到低，高的会覆盖低的相同的部分)
+file:./config/
+file:./
+classpath:/config/
+classpath:/
+server.context-path=/boot02 配置项目的访问路径
+
+5.用命令行修改默认配置
+java -jar ... --server.port=8087 --server.context-path=/..
+由jar包外向jar包内进行寻找，优先加载带profile的
+
+
+6.logging.file=springboot.log 指定路径下生成日志，默认本项目
+logging.path=/spring/log 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹，使用spring.log作为默认文件
