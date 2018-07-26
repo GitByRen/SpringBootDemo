@@ -1,5 +1,7 @@
 package com.example.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +24,12 @@ public class HelloController {
     @RequestMapping("/sayHello")
     public String sayHello() {
         return "hello:" + name;
+    }
+    
+    @RequestMapping("/success")
+    public String success(Map<String, Object> map) {
+        map.put("hello", "你好");
+        return "success";
     }
 
 }
