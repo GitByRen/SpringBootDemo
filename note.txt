@@ -53,16 +53,20 @@ spring:
 
 ************也可以用命令行的方式激活指定profile --spring.profiles.active=dev
 
-4.配置文件加载位置(优先级从高到低，高的会覆盖低的相同的部分)
+4.配置文件加载位置(优先级从高到低，高的会覆盖低的相同的部分，剩下的会形成互补)
 file:./config/
 file:./
 classpath:/config/
 classpath:/
 server.context-path=/boot02 配置项目的访问路径
+可以通过命令行的方式spring.config.location=G:/application.properties来改变默认配置
 
 5.用命令行修改默认配置
 java -jar ... --server.port=8087 --server.context-path=/..
 由jar包外向jar包内进行寻找，优先加载带profile的
+
+例：外部文件为application-prod.properties，项目中spring.profiles.active=dev，
+启动项目后不会加载外部prod文件，而是加载激活的环境，如果外部文件名和激活的环境相同，则加载外部文件
 
 
 6.logging.file=springboot.log 指定路径下生成日志，默认本项目
