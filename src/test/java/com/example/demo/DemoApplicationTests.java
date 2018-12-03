@@ -27,6 +27,7 @@ public class DemoApplicationTests {
     public void testHelloService() {
         boolean containsBean = ioc.containsBean("helloService");
         System.out.println(containsBean);
+        System.out.println(person);
     }
 
     @Test
