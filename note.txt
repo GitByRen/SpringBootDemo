@@ -79,10 +79,16 @@ java -jar ... --server.port=8087 --server.context-path=/..
 
 7.日志
 ①日志门面：JCL，SLF4J
-②日志实现：Log4j、Log4j2、Logback
+②日志实现：Log4j（有性能问题）、Log4j2、Logback
 一般选择SLF4J,Logback
 注：日志记录方法的调用，不应该来直接调用日志的实现类，而是调用抽象层里面的方法
-
-
-logging.file=springboot.log 指定路径下生成日志，默认本项目
+③slf4j原理：application->slf4j->logback-core、application->slf4j->slf4j-log4l2.jar->log4j.jar
+如果slf4j要与其他日志实现结合起来，中间要加适配器
+④统一日志记录，让别的框架和我一起使用slf4j
+	1)将系统中的其他日志框架排除
+	2)用中间包来替换原有的日志框架
+	3)导入slf4j其他的实现
+⑤日志级别：trace<debug<info<warn<error
+⑥指定文件名和指定目录
+logging.file=springboot.log 不指定路径在当前项目下生成，可以指定完整路径
 logging.path=/spring/log 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹，使用spring.log作为默认文件
