@@ -80,9 +80,9 @@ java -jar ... --server.port=8087 --server.context-path=/..
 7.日志
 ①日志门面：JCL，SLF4J
 ②日志实现：Log4j（有性能问题）、Log4j2、Logback
-一般选择SLF4J,Logback
+一般选择SLF4J,Logback（log4j、slf4j、logback出自同一人之手,但是logback是基于slf4j日志门面来写的）
 注：日志记录方法的调用，不应该来直接调用日志的实现类，而是调用抽象层里面的方法
-③slf4j原理：application->slf4j->logback-core、application->slf4j->slf4j-log4l2.jar->log4j.jar
+③slf4j原理：application->slf4j->logback-core、application->slf4j->slf4j-log4j12.jar->log4j.jar
 如果slf4j要与其他日志实现结合起来，中间要加适配器
 ④统一日志记录，让别的框架和我一起使用slf4j
 	1)将系统中的其他日志框架排除
@@ -92,3 +92,24 @@ java -jar ... --server.port=8087 --server.context-path=/..
 ⑥指定文件名和指定目录
 logging.file=springboot.log 不指定路径在当前项目下生成，可以指定完整路径
 logging.path=/spring/log 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹，使用spring.log作为默认文件
+⑦指定日志格式
+logging.pattern.console 在控制台输出的日志格式
+logging.pattern.file 指定文件中日志输出的格式
+⑧自定义输出日志
+如果用的是logback，直接把logback.xml复制到resources下即可
+如果放的是logback.xml，直接就被日志框架识别了
+如果放的是logback-spring.xml，日志框架就不直接加载日志的配置项，由springBoot加载，就可以使用springBoot的高级特性，比如profile功能
+
+8、web开发
+①所有/webjars/**，都去classpath:/META-INF/resources/webjars/  找资源
+②存放静态资源的文件夹
+classpath:/META-INF/resources/
+classpath:/resources/
+clsspath:/public/
+classpath:/static/
+"/":当前项目根路径
+注：classpath为src/main/java下或者src/main/resources下
+③Thymeleaf使用&语法
+只要我们把HTML页面放在classpath:/templates，thymeleaf就能自动渲染
+④th:任意属性  来替换原生属性的值
+
