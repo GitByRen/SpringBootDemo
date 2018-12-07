@@ -112,4 +112,5 @@ classpath:/static/
 ③Thymeleaf使用&语法
 只要我们把HTML页面放在classpath:/templates，thymeleaf就能自动渲染
 ④th:任意属性  来替换原生属性的值
-
+⑤扩展SpringMVC：编写一个配置类，实现WebMvcConfigurer，这样既保留了所有的自动配置，也能用我们扩展的配置
+⑥接管SpringMVC：在配置类中添加@EnableWebMvc即可，这样原有的SpringMVC的自动配置都失效了
