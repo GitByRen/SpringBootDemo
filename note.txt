@@ -101,16 +101,57 @@ logging.pattern.file 指定文件中日志输出的格式
 如果放的是logback-spring.xml，日志框架就不直接加载日志的配置项，由springBoot加载，就可以使用springBoot的高级特性，比如profile功能
 
 8、web开发
-①所有/webjars/**，都去classpath:/META-INF/resources/webjars/  找资源
+①所有/webjars/**请求，都去classpath:/META-INF/resources/webjars/  找资源
 ②存放静态资源的文件夹
 classpath:/META-INF/resources/
 classpath:/resources/
 clsspath:/public/
 classpath:/static/
-"/":当前项目根路径
+优先级顺序为：META-INF/resources > resources > static > public
 注：classpath为src/main/java下或者src/main/resources下
 ③Thymeleaf使用&语法
 只要我们把HTML页面放在classpath:/templates，thymeleaf就能自动渲染
 ④th:任意属性  来替换原生属性的值
 ⑤扩展SpringMVC：编写一个配置类，实现WebMvcConfigurer，这样既保留了所有的自动配置，也能用我们扩展的配置
 ⑥接管SpringMVC：在配置类中添加@EnableWebMvc即可，这样原有的SpringMVC的自动配置都失效了
+⑦国际化：classpath下建立i18n文件夹并加入相关的properties文件，然后在配置文件中设置spring.message.basename=...即可，
+这样就能根据浏览器的设置自动变换
+原理：框架会根据请求头带来的区域信息获取Locale进行国际化
+⑧开发期间模板引擎页面修改以后，要实时生效，1）禁用模板缓存 2）页面修改完后重写编译(idea)
+⑨拦截器
+springboot2.0以后也会拦截静态资源，所以需要排除掉，要排除静态资源文件夹（static...）下的文件，否则还是不行（/asserts/**）
+
+crud...省略（有需要时回看）
+
+9.错误处理
+1）如何定制错误响应页面
+	1）有模板引擎的情况下，【将错误页面命名为错误状态码.html放在模板引擎文件夹（templates）里面的error文件夹下】，
+	  页面能获取到的信息：timestamp，status，error，exception，message，errors
+	2）没有模板引擎的情况下，静态资源文件夹下找错误状态码.html
+	3）以上都没有则用SpringBoot默认的
+2）如何定制错误的json数据
+	1）自定义异常处理 @ControllerAdvice、@ExceptionHandler，但是不能自适应（浏览器客户端返回的都是json）
+	2）在1）的基础上转发到/error进行自适应响应效果处理，注意要传入我们自己的错误状态码，否则就不会进入错误页面
+
+10、嵌入式Servlet
+①springBoot2.0以后去掉了EmbeddedServletContainerCustomizer
+②注册三大组件Servlet、Filter、Listener
+由于SpringBoot默认是以jar包的方式启动嵌入式的Servlet容器来启动SpringBoot的web应用，没有web.xml文件
+所以注册组件用以下方式：
+ServletRegistrationBean
+FilterRegistrationBean
+ServletListenerRegistrationBean
+注意：他们都可以用setLoadOnStartup指定启动顺序
+③使用其他的嵌入式容器
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-web</artifactId>
+	<exclusions>
+		<exclusion>
+			排除tomcat的stater
+		</exclusion>
+	</exclusions>
+</dependency>
+<dependency>
+	引入jetty的stater
+</dependency>
