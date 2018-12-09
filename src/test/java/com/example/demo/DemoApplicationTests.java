@@ -1,5 +1,10 @@
 package com.example.demo;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -22,6 +27,24 @@ public class DemoApplicationTests {
     ApplicationContext ioc;
 
     Logger logger = LoggerFactory.getLogger(getClass());
+    
+    @Autowired
+    DataSource datasource;
+    
+    @Test
+    public void testDataSource() {
+    	System.out.println(datasource.getClass());
+    	
+    	Connection connection;
+		try {
+			connection = datasource.getConnection();
+			System.out.println(connection);
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
+    
     
     @Test
     public void testHelloService() {

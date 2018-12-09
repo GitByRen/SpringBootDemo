@@ -16,7 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @ImportResource(locations = {"classpath:beans.xml"})：导入Spring的配置文件
  */
 
-// @ImportResource(locations = {"classpath:beans.xml"}) 不推荐
+// @ImportResource(locations = {"classpath:beans.xml"}) 
+
 @SpringBootApplication
 public class DemoApplication {
 
