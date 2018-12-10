@@ -214,3 +214,9 @@ docker run -d -p 8888:8080 tomcat
 	mybatis:
 		config-location：mybatis/mybatis-config.xml  指定全局配置文件的位置
 		mapper-locations：mybatis/mapper.xml  指定sql映射文件的位置
+
+13、SpringBoot原理
+ApplicationContextInitializer
+SpringApplicationRunListener
+ApplicationRunner
+CommandLineRunner
