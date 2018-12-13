@@ -87,7 +87,12 @@
 		<!-- springsecurity -->
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
 			</dependency> -->
-
+		
+		<dependency>
+			<groupId>com.important.starter</groupId>
+			<artifactId>important-spring-boot-starter</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<!-- 将应用打包成可执行的jar包 -->

@@ -7,7 +7,7 @@ public class CacheImpl implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		System.out.println("执行初始化操作>>>>>>>>>>>>>1");
+		// System.out.println("执行初始化操作>>>>>>>>>>>>>1");
 	}
 	
 }
