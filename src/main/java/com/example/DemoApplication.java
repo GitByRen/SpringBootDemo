@@ -19,7 +19,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // @ImportResource(locations = {"classpath:beans.xml"}) 
 
 @SpringBootApplication
-//@MapperScan("com.example.mapper")
 public class DemoApplication {
 
 	public static void main(String[] args) {
