@@ -9,11 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.example.component.LoginInterceptor;
 
 /**
  * 既保留了所有的自动配置，也能用我们扩展的配置
@@ -40,11 +37,11 @@ public class MyMvcConfig implements WebMvcConfigurer {
 				registry.addViewController("/main.html").setViewName("dashboard");
 			}
 
-			@Override
-			public void addInterceptors(InterceptorRegistry registry) {
-				registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
-						.excludePathPatterns("/index.html", "/", "/user/login", "/webjars/**", "/asserts/**");
-			}
+//			@Override
+//			public void addInterceptors(InterceptorRegistry registry) {
+//				registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**")
+//						.excludePathPatterns("/index.html", "/", "/user/login", "/webjars/**", "/asserts/**");
+//			}
 		};
 	}
 
