@@ -14,7 +14,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.example.bean.Department;
 import com.example.bean.Person;
+import com.example.mapper.DepartmentMapper;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,6 +32,17 @@ public class DemoApplicationTests {
     
     @Autowired
     DataSource datasource;
+    
+    @Autowired
+    private DepartmentMapper departmentMapper;
+    
+    @Test
+    public void testDepartment() {
+    	Department department = new Department();
+    	department.setDepartmentName("测试");
+    	departmentMapper.insertDept(department);
+    	System.out.println(department.getId());
+    }
     
     @Test
     public void testDataSource() {

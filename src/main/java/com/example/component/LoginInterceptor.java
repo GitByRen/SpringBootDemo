@@ -11,6 +11,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("preHandle在Filter之后执行吗？");
 		Object user = request.getSession().getAttribute("loginUser");
 		if (user == null) {
 			// 未登录

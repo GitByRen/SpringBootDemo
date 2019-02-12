@@ -10,7 +10,7 @@ public class HellpSpringApplicationRunListener implements SpringApplicationRunLi
 	public HellpSpringApplicationRunListener(SpringApplication application, String[] args) {
 
 	}
-
+ 
 	@Override
 	public void starting() {
 		System.out.println("SpringApplicationRunListener...starting...");
