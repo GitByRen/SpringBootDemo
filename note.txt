@@ -62,7 +62,7 @@ server.context-path=/boot02 配置项目的访问路径
 可以通过命令行的方式spring.config.location=G:/application.properties来改变默认配置
 
 5.用命令行修改默认配置
-java -jar ... --server.port=8087 --server.context-path=/..
+java -jar xxx.jar --server.port=8087 --server.context-path=/..
 由jar包外向jar包内进行寻找，优先加载带profile的，再来加载不带profile的
 
 例：外部文件为application-prod.properties，项目中spring.profiles.active=dev，
